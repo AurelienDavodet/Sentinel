@@ -44,4 +44,4 @@ def transform(prompt: str, history: list[mel.ChatMessage]) -> str:
 
 @me.page(path="/chat")
 def chat():
-    mel.chat(transform)
+    mel.chat(transform, title="Sentinel")

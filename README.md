@@ -40,8 +40,8 @@ Then, go to this link  : http://localhost:32123
 User: What's the latest on French economic policy?
 → Search tool → Crawl a government site → Summarize content → Return structured brief
 
-User: Summarize this long PDF from a data science conference
-→ Crawl the URL → Extract content → Summarize → Save in memory
+User: Summarize this webpage from a data science news website
+→ Crawl the URL → Extract content → Summarize
 ```
 
 ## 🤖 About the Name

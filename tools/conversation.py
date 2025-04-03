@@ -5,7 +5,6 @@ from langchain.tools import Tool
 from utils import conversation_history
 
 
-
 def get_conversation_history(thread_id: str, limit: int = 10) -> str:
     """Retrieve the conversation history for a thread."""
     if thread_id not in conversation_history:

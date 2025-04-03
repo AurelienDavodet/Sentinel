@@ -1,11 +1,27 @@
-import time
-from langchain_core.messages import HumanMessage
-from utils import save_conversation
 from datetime import datetime
 from typing import Dict, List, Any, Union
+import os
+from langchain_openai import ChatOpenAI
+from utils import constants
+from dotenv import load_dotenv
+load_dotenv()
+
+
+def get_openai_client(model):
+    """Initialize and return the OpenAI Chat client."""
+    return ChatOpenAI(
+        api_key=os.getenv("OPENAI_API_KEY"),
+        model="gpt-3.5-turbo",
+        temperature=0.7,
+    )
+
+
+# Initialize client and memory
+client = get_openai_client(model=constants.MODEL_NAME)
 
 # Create a conversation history store
 conversation_history: Dict[str, List[Dict[str, Union[str, Any]]]] = {}
+
 
 def save_conversation(thread_id: str, role: str, message: str) -> None:
     """Save a message to the conversation history."""
@@ -15,6 +31,7 @@ def save_conversation(thread_id: str, role: str, message: str) -> None:
     conversation_history[thread_id].append(
         {"role": role, "content": message, "timestamp": datetime.now().isoformat()}
     )
+
 
 def process_agent_response(step, thread_id):
     """Process and display agent responses with better formatting."""
@@ -50,54 +67,3 @@ def process_agent_response(step, thread_id):
             return content.content
 
     return None
-
-
-def _run_agent_conversation(query: str, thread_id: str = "default_thread"):
-    """
-    Run a conversation with the agent and display the results in a more user-friendly way.
-
-    Args:
-        query: The user's question or message
-        thread_id: A unique identifier for the conversation thread
-    """
-    print(f"\n💬 User: {query}")
-    print("-" * 80)
-
-    # Save user message to history
-    save_conversation(thread_id, "User", query)
-
-    config = {"configurable": {"thread_id": thread_id}}
-    final_response = None
-
-    try:
-        for step in agent.stream(
-            {"messages": [HumanMessage(content=query)]}, config, stream_mode="updates"
-        ):
-            response = process_agent_response(step, thread_id)
-            if response and "agent" in step:
-                final_response = response
-
-    except Exception as e:
-        error_message = f"Error during agent processing: {str(e)}"
-        print(f"\n❌ {error_message}")
-        final_response = error_message
-
-    return final_response
-
-
-# ---------------------------------------------------------------------------
-# Interactive Agent with Continuous Conversation
-# ---------------------------------------------------------------------------
-
-def interactive_agent():
-    """Run an interactive conversation with the agent."""
-    thread_id = f"thread_{int(time.time())}"
-    print("\n📱 Interactive Agent - Type 'exit' to quit\n")
-
-    while True:
-        query = input("\n❓ What would you like to know? ")
-        if query.lower() in ["exit", "quit", "bye"]:
-            print("\nThank you for using the agent. Goodbye!")
-            break
-
-        _run_agent_conversation(query, thread_id)

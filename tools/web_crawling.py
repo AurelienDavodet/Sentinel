@@ -3,10 +3,9 @@
 import asyncio
 import json
 from datetime import datetime
-from typing import Dict
+from typing import Dict, Any
 from crawl4ai import AsyncWebCrawler
 from langchain.tools import Tool
-import json
 
 
 async def _crawl(url: str, max_depth: int = 1, max_links: int = 10) -> Dict[str, Any]:

@@ -4,4 +4,13 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "crawl4ai==0.4.248",
+    "duckduckgo-search==7.5.1",
+    "langchain==0.3.7",
+    "langchain-community==0.3.7",
+    "langchain-openai==0.3.7",
+    "langgraph==0.2.71",
+    "mesop>=1.0.1",
+    "numpy==1.26.4",
+]

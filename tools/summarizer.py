@@ -3,9 +3,10 @@
 from langchain.tools import Tool
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
+from utils import client
 
 
-def create_summarizer():
+def _create_summarizer(llm):
     prompt = ChatPromptTemplate.from_messages(
         [
             (
@@ -20,9 +21,7 @@ def create_summarizer():
         ]
     )
 
-    return prompt | client | StrOutputParser()
-
-summarizer = create_summarizer()
+    return prompt | llm | StrOutputParser()
 
 
 def summarize_text(text: str) -> str:
@@ -31,6 +30,7 @@ def summarize_text(text: str) -> str:
         return "The provided text is too short to require summarization."
 
     try:
+        summarizer = _create_summarizer(llm=client)
         summary = summarizer.invoke({"text": text})
         return summary
     except Exception as e:

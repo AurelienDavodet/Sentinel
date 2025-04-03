@@ -1,6 +1,8 @@
 # 🛰️ Sentinel – Your AI-powered Information Watchdog
 Sentinel is a personal AI agent designed to track, summarize, and contextualize current information across domains like data science, AI, politics, and economics. Powered by multiple tools and intelligent reasoning, it offers a modular, interactive interface to stay ahead of the curve — hands-free.
 
+![Chat Example](assets/chat_example.png)
+
 ## 🚀 Features
 - 🔎 Real-time Web Search: Uses DuckDuckGo to fetch and analyze the latest updates.
 - 🌐 Smart Website Crawling: Crawls specific URLs for structured, rich content extraction.

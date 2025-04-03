@@ -42,6 +42,17 @@ def transform(prompt: str, history: list[mel.ChatMessage]) -> str:
     return final_response
 
 
-@me.page(path="/chat")
+def on_load(e: me.LoadEvent):
+  me.set_theme_mode("system")
+
+
+@me.page(
+  security_policy=me.SecurityPolicy(
+    allowed_iframe_parents=["https://mesop-dev.github.io"]
+  ),
+  path="/chat",
+  title="Sentiel",
+  on_load=on_load,
+)
 def chat():
     mel.chat(transform, title="Sentinel")

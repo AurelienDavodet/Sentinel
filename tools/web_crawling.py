@@ -3,7 +3,8 @@
 import asyncio
 import json
 from datetime import datetime
-from typing import Dict, Any
+from typing import Any, Dict
+
 from crawl4ai import AsyncWebCrawler
 from langchain.tools import Tool
 

@@ -1,9 +1,10 @@
 # DuckDuckGo Search with Improved Error Handling
 
+from datetime import datetime
+
+from langchain.tools import Tool
 from langchain_community.tools import DuckDuckGoSearchRun
 from tenacity import retry, stop_after_attempt, wait_exponential
-from langchain.tools import Tool
-from datetime import datetime
 
 duckduckgo_search_tool = DuckDuckGoSearchRun()
 
@@ -37,18 +38,18 @@ search_tool = Tool(
     description="""
         Use this tool when you need current or updated information that you don't already have.
         Use it multiple times as needed to get comprehensive information.
-        
+
         Best practices:
         1. First try to answer using your existing knowledge
         2. Use specific, focused search queries
         3. Break complex queries into simple, targeted searches
         4. Use quotes for exact phrase matching
-        
+
         Avoid using this tool for:
         - Basic factual information you should already know
         - Historical information before 2024
         - Definition of common terms
-        
+
         Current date: {current_date}
         """.format(
         current_date=datetime.now().strftime("%Y-%m-%d")

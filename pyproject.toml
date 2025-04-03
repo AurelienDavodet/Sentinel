@@ -14,3 +14,8 @@ dependencies = [
     "mesop>=1.0.1",
     "numpy==1.26.4",
 ]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+]

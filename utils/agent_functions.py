@@ -1,9 +1,12 @@
-from datetime import datetime
-from typing import Dict, List, Any, Union
 import os
-from langchain_openai import ChatOpenAI
-from utils import constants
+from datetime import datetime
+from typing import Any, Dict, List, Union
+
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+
+from utils import constants
+
 load_dotenv()
 
 
